@@ -1,4 +1,5 @@
-from mycroft import MycroftSkill, intent_file_handler, FileSystemAccess
+from mycroft import MycroftSkill, intent_file_handler
+from mycroft.filesystem import FileSystemAccess
 from mycroft.util.log import LOG
 
 import requests
@@ -34,7 +35,7 @@ class AceProlog(MycroftSkill):
     @intent_file_handler('remember.intent')
     def handle_remember(self, message):
         remember = message.data.get('text')
-        save_data_file(self, "test.txt", "hallo")
+        save_data_file(self, "test.txt", remember)
         self.speak_dialog('answer', data={'result': remember})
 
     @intent_file_handler('prove.intent')
@@ -46,7 +47,8 @@ class AceProlog(MycroftSkill):
     @intent_file_handler('question.intent')
     def handle_question(self, message):
         question = message.data.get('text')
-        self.speak_dialog('answer', data={'result': question})
+        data = load_data_file(self, "test.txt")
+        self.speak_dialog('answer', data={'result': data})
 
 
 def create_skill():
