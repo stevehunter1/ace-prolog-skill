@@ -16,7 +16,7 @@ class AceProlog(MycroftSkill):
         self.speak_dialog('answer', data={'result': prove})
 
     @intent_file_handler('question.intent')
-    def handle_question(self, message)
+    def handle_question(self, message):
         question = message.data.get('text')
         self.speak_dialog('answer', data={'result': question})
 
