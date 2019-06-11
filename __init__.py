@@ -35,7 +35,7 @@ class AceProlog(MycroftSkill):
     @intent_file_handler('remember.intent')
     def handle_remember(self, message):
         remember = message.data.get('text')
-        save_data_file(self, "test.txt", remember)
+        save_data_file(self, "test.txt", remember, "a")
         self.speak_dialog('answer', data={'result': remember})
 
     @intent_file_handler('prove.intent')
