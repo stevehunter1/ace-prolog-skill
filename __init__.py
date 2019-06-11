@@ -7,13 +7,18 @@ class AceProlog(MycroftSkill):
 
     @intent_file_handler('remember.intent')
     def handle_remember(self, message):
-        text = message.data.get('text')
-        self.speak_dialog('answer', data={'result': text})
+        remember = message.data.get('text')
+        self.speak_dialog('answer', data={'result': remember})
 
     @intent_file_handler('prove.intent')
     def handle_prove(self, message):
         prove = message.data.get('text')
-        self.speak_dialog('answer', data={'result':prove})
+        self.speak_dialog('answer', data={'result': prove})
+
+    @intent_file_handler('question.intent')
+    def handle_question(self, message)
+        question = message.data.get('text')
+        self.speak_dialog('answer', data={'result': question})
 
 
 def create_skill():
