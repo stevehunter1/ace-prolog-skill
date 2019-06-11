@@ -3,13 +3,13 @@ from mycroft import MycroftSkill, intent_file_handler
 import requests
 
 
+def get_test(s):
+    r = requests.get("https://www.felix-frank.com/")
+    return r.text
+
 class AceProlog(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
-
-    def get_test(s)
-        r = requests.get("https://www.felix-frank.com/")
-        return r.text
 
     @intent_file_handler('remember.intent')
     def handle_remember(self, message):
