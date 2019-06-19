@@ -1,5 +1,6 @@
 import requests
-from lxml import etree
+# from lxml import etree
+import xml.etree.ElementTree as EL
 
 url = "http://attempto.ifi.uzh.ch/ws/race/racews.perl"
 headers = {"content-type":"text/xml"}
@@ -19,8 +20,8 @@ def check_consistency(knowledge):
       </env:Body>
   </env:Envelope>"""
   response = requests.post(url, data = body, headers = headers)
-  root = etree.fromstring(response.content)
-  # etree.dump(root)
+  root = EL.fromstring(response.content)
+  EL.dump(root)
   good = True
   for el in root.iterfind(".//race:Proof", ns):
     if el is not None:
@@ -40,8 +41,8 @@ def prove_with_answer(knowledge, theorem):
       </env:Body>
   </env:Envelope>"""
   response = requests.post(url, data = body, headers = headers)
-  root = etree.fromstring(response.content)
-  etree.dump(root)
+  root = EL.fromstring(response.content)
+  EL.dump(root)
   good = False
   for el in root.iterfind(".//race:Proof", ns):
     if el is not None:
@@ -61,8 +62,8 @@ def ask_with_answer(knowledge, question):
       </env:Body>
   </env:Envelope>"""
   response = requests.post(url, data = body, headers = headers)
-  root = etree.fromstring(response.content)
-  etree.dump(root)
+  root = EL.fromstring(response.content)
+  EL.dump(root)
   good = False
   for el in root.iterfind(".//race:Proof", ns):
     if el is not None:

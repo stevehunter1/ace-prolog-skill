@@ -3,7 +3,8 @@ from mycroft.filesystem import FileSystemAccess
 from mycroft.util.log import LOG
 
 import requests
-from lxml import etree
+# from lxml import etree
+import xml.etree.ElementTree as EL
 
 
 url = "http://attempto.ifi.uzh.ch/ws/race/racews.perl"
@@ -24,7 +25,7 @@ def check_consistency(knowledge):
       </env:Body>
   </env:Envelope>"""
     response = requests.post(url, data=body, headers=headers)
-    root = etree.fromstring(response.content)
+    root = EL.fromstring(response.content)
     # etree.dump(root)
     good = True
     for el in root.iterfind(".//race:Proof", ns):
@@ -46,7 +47,7 @@ def prove_with_answer(knowledge, theorem):
       </env:Body>
   </env:Envelope>"""
     response = requests.post(url, data=body, headers=headers)
-    root = etree.fromstring(response.content)
+    root = EL.fromstring(response.content)
     # etree.dump(root)
     good = False
     for el in root.iterfind(".//race:Proof", ns):
@@ -68,7 +69,7 @@ def ask_with_answer(knowledge, question):
       </env:Body>
   </env:Envelope>"""
     response = requests.post(url, data=body, headers=headers)
-    root = etree.fromstring(response.content)
+    root = EL.fromstring(response.content)
     # etree.dump(root)
     good = False
     for el in root.iterfind(".//race:Proof", ns):
